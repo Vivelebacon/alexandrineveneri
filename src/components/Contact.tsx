@@ -62,13 +62,13 @@ export function Contact() {
             <div className="col-span-2 mt-4">
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-moss block mb-4">Suivre</span>
               <div className="flex gap-4">
-                <a href="#" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="Instagram">
+                <a href="https://www.instagram.com/alexandrineveneri/?hl=en" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="Instagram">
                   <InstagramIcon className="w-4 h-4" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/alexandrine-veneri-373521313/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="LinkedIn">
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="Pinterest">
+                <a href="https://fr.pinterest.com/alexandrineveneri1/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-ink/20 flex items-center justify-center hover:bg-ink hover:text-cream transition-colors duration-500" aria-label="Pinterest">
                   <PinterestIcon className="w-4 h-4" />
                 </a>
               </div>
