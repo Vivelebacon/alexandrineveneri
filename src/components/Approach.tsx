@@ -1,49 +1,55 @@
-import { useScrollReveal } from '../hooks/useScrollReveal'
-
 const steps = [
   {
-    number: '01',
-    title: 'Écoute & diagnostic',
-    description: 'Chaque collaboration commence par une immersion dans votre univers. Vos habitudes, vos aspirations, la singularité du lieu — rien n\'est laissé au hasard.',
+    n: '01',
+    title: 'Écoute',
+    desc: 'Comprendre vos modes de vie, vos rituels, vos contraintes. Ressentir le lieu, son histoire, sa lumière.',
   },
   {
-    number: '02',
+    n: '02',
     title: 'Conception',
-    description: 'Des plans aux matériaux, chaque décision est guidée par une vision cohérente qui concilie esthétique et fonctionnalité.',
+    desc: 'Dessiner les volumes, choisir les matières, orchestrer la lumière. Présentation de planches et perspectives 3D.',
   },
   {
-    number: '03',
-    title: 'Réalisation',
-    description: 'Un suivi rigoureux de chantier garantit que la vision initiale se concrétise avec précision, dans le respect des délais et du budget.',
+    n: '03',
+    title: 'Suivi',
+    desc: 'Coordination des artisans, sélection des pièces sur-mesure, suivi de chantier jusqu\'aux dernières finitions.',
+  },
+  {
+    n: '04',
+    title: 'Livraison',
+    desc: 'Mise en scène finale, styling, photographies professionnelles. Le lieu vous est restitué, prêt à être habité.',
   },
 ]
 
-export default function Approach() {
-  const { ref, isVisible } = useScrollReveal(0.15)
-
+export function Approach() {
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      className={`py-32 px-6 lg:px-12 bg-stone-100 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <p className="section-label mb-4">Méthode</p>
-          <h2 className="heading-display text-4xl md:text-5xl">
-            La démarche
+    <section id="approach" className="relative py-32 lg:py-48 bg-ink text-cream overflow-hidden">
+      {/* Subtle grain */}
+      <div className="absolute inset-0 grain" />
+
+      <div className="relative max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="max-w-4xl scroll-reveal">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-cream/50 block mb-6">
+            — 03 / Méthode
+          </span>
+          <h2 className="font-display text-5xl md:text-7xl lg:text-[8rem] tracking-tightest font-light leading-[0.95]">
+            Quatre temps<br />
+            <span className="italic text-sand">pour un projet juste.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {steps.map((step, i) => (
+        <div className="mt-20 lg:mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-cream/10">
+          {steps.map((s) => (
             <div
-              key={step.number}
-              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: `${i * 150}ms` }}
+              key={s.n}
+              className="scroll-reveal bg-ink p-8 lg:p-10 group hover:bg-ash transition-colors duration-700"
             >
-              <p className="font-serif text-6xl font-light text-stone-300 mb-6">{step.number}</p>
-              <h3 className="font-serif text-xl font-light text-stone-900 mb-4">{step.title}</h3>
-              <p className="text-stone-600 leading-relaxed text-sm">{step.description}</p>
+              <div className="flex items-baseline justify-between mb-12">
+                <span className="font-display text-6xl lg:text-7xl font-light text-sand/80">{s.n}</span>
+                <span className="w-2 h-2 rounded-full bg-terracotta" />
+              </div>
+              <h3 className="font-display text-2xl lg:text-3xl tracking-tightest mb-4">{s.title}</h3>
+              <p className="text-sm lg:text-base text-cream/70 leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>

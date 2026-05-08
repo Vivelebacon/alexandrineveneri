@@ -1,8 +1,10 @@
-import Contact from '../components/Contact'
+import { Contact } from '../components/Contact'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
-export default function ContactPage() {
+export function ContactPage() {
+  useScrollReveal()
   return (
-    <div className="pt-16">
+    <div className="pt-20 bg-cream">
       <Contact />
     </div>
   )

@@ -1,53 +1,103 @@
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowDown } from 'lucide-react'
 
-export default function Hero() {
+export function Hero() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+
   return (
-    <section className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <img
-          src="/projects/volumes.jpg"
-          alt="Alexandrine Veneri — Architecture d'intérieur"
+    <section ref={ref} className="relative min-h-screen overflow-hidden bg-ink flex flex-col">
+      {/* Background video with parallax */}
+      <motion.div
+        style={{ y: videoY, scale: videoScale }}
+        className="absolute inset-0 w-full h-[120%]"
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-stone-900/20 to-transparent" />
+          poster="/projects/galerie.jpg"
+        >
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient overlay for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/20 to-ink/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/30 via-transparent to-transparent" />
+      </motion.div>
+
+      {/* Floating meta info */}
+      <div className="absolute top-32 left-6 lg:left-12 z-10 text-xs font-mono uppercase tracking-[0.3em] text-cream/60">
+        <span className="block">Est. 2010</span>
+        <span className="block mt-1">Paris · Île-de-France</span>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-        <div className="max-w-2xl">
-          <p className="section-label text-stone-300 mb-6 animate-fade-in" style={{ animationDelay: '0.2s', opacity: 0 }}>
-            Architecte d'intérieur
-          </p>
-          <h1
-            className="font-serif font-light text-5xl md:text-7xl lg:text-8xl text-white leading-none mb-8 animate-fade-up"
-            style={{ animationDelay: '0.4s', opacity: 0 }}
-          >
-            Alexandrine
-            <br />
-            <em>Veneri</em>
-          </h1>
-          <p
-            className="text-stone-300 text-lg font-light mb-12 max-w-md leading-relaxed animate-fade-up"
-            style={{ animationDelay: '0.6s', opacity: 0 }}
-          >
-            Créatrice d'espaces qui allient élégance intemporelle et fonctionnalité contemporaine.
-          </p>
-          <div className="animate-fade-up" style={{ animationDelay: '0.8s', opacity: 0 }}>
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-3 text-xs tracking-widest uppercase text-white border border-white/50 px-8 py-4 hover:bg-white hover:text-stone-900 transition-all duration-300"
-            >
-              Découvrir le portfolio
-              <span>→</span>
-            </Link>
-          </div>
-        </div>
+      <div className="absolute top-32 right-6 lg:right-12 z-10 text-xs font-mono uppercase tracking-[0.3em] text-cream/60 text-right">
+        <span className="block">N°001</span>
+        <span className="block mt-1">Studio</span>
+      </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 right-12 hidden lg:flex flex-col items-center gap-3 animate-fade-in" style={{ animationDelay: '1.2s', opacity: 0 }}>
-          <span className="text-xs tracking-widest uppercase text-stone-400 rotate-90 origin-center translate-y-6">Scroll</span>
-          <div className="w-px h-16 bg-stone-400/50" />
+      {/* Centered content */}
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 flex-1 max-w-[1600px] w-full mx-auto px-6 lg:px-12 pt-32 lg:pt-36 pb-10 flex flex-col justify-center items-center text-center"
+      >
+        {/* Massive serif headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+          className="font-display font-light text-[clamp(2.25rem,7vw,7rem)] leading-[0.95] tracking-tightest text-balance text-cream"
+        >
+          <span className="block">Concevoir</span>
+          <span className="block italic font-normal text-sand">des espaces</span>
+          <span className="block">qui se vivent.</span>
+        </motion.h1>
+
+        {/* Scroll indicator centered below title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.6 }}
+          className="mt-14 lg:mt-20 flex flex-col items-center gap-4"
+        >
+          <Link
+            to="/realisations"
+            className="w-14 h-14 rounded-full border border-cream/30 flex items-center justify-center hover:bg-cream hover:text-ink transition-all duration-500 group"
+            aria-label="Voir les projets"
+          >
+            <ArrowDown className="w-4 h-4 text-cream group-hover:text-ink transition-colors animate-bounce" />
+          </Link>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-cream/60">
+            Découvrir les projets
+          </span>
+        </motion.div>
+      </motion.div>
+
+      {/* Bottom marquee — now a flex item, no longer absolute */}
+      <div className="relative border-t border-cream/20 py-5 overflow-hidden bg-ink/30 backdrop-blur-sm z-10">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-12 mr-12 font-mono text-xs uppercase tracking-[0.35em] text-cream/60">
+              <span>Art & Décoration</span>
+              <span className="w-1 h-1 rounded-full bg-cream/40" />
+              <span>M comme Maison</span>
+              <span className="w-1 h-1 rounded-full bg-cream/40" />
+              <span>Immersive Home Design</span>
+              <span className="w-1 h-1 rounded-full bg-cream/40" />
+              <span>C8 · Télévision</span>
+              <span className="w-1 h-1 rounded-full bg-cream/40" />
+              <span>Le Jacquard Français</span>
+              <span className="w-1 h-1 rounded-full bg-cream/40" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

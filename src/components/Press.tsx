@@ -1,61 +1,41 @@
-import { useScrollReveal } from '../hooks/useScrollReveal'
-
-const pressItems = [
-  {
-    publication: 'Maison Française',
-    date: 'Novembre 2023',
-    title: '« Les espaces d\'Alexandrine Veneri respirent une élégance rare »',
-    excerpt: 'Un reportage sur la rénovation d\'un duplex parisien qui a séduit la rédaction par son équilibre entre héritage architectural et modernité.',
-  },
-  {
-    publication: 'AD France',
-    date: 'Septembre 2023',
-    title: '« Bourguignon et contemporain : l\'alchimie réussie »',
-    excerpt: 'La maison de campagne signée Veneri fait la une de la rubrique rénovation du magazine.',
-  },
-  {
-    publication: 'Elle Décoration',
-    date: 'Mars 2022',
-    title: '« Architectes à suivre en 2022 »',
-    excerpt: 'Alexandrine Veneri figure parmi les dix créateurs d\'intérieur les plus prometteurs de sa génération.',
-  },
+const press = [
+  { name: 'Art & Décoration', issue: 'Nº 524 · 2024', quote: 'Une élégance qui ne crie jamais.' },
+  { name: 'M comme Maison', issue: 'Saison 7 · C8', quote: 'L\'architecte qui réconcilie famille et beauté.' },
+  { name: 'Immersive Home', issue: 'Édition 2023', quote: 'Le sur-mesure pensé jusqu\'au moindre détail.' },
+  { name: 'AD Magazine', issue: 'Sept. 2023', quote: 'Une signature retenue, quasi invisible.' },
 ]
 
-export default function Press() {
-  const { ref, isVisible } = useScrollReveal(0.15)
-
+export function Press() {
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      className={`py-32 px-6 lg:px-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <p className="section-label mb-4">Médias</p>
-            <h2 className="heading-display text-4xl md:text-5xl">Presse</h2>
+    <section id="press" className="relative py-32 lg:py-48">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="lg:col-span-4 scroll-reveal">
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-moss block mb-6">
+              — 04 / Presse
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tightest font-light leading-[1.02]">
+              Ils en ont<br />
+              <span className="italic text-terracotta">parlé.</span>
+            </h2>
           </div>
-        </div>
 
-        <div className="space-y-0 divide-y divide-stone-200">
-          {pressItems.map((item, i) => (
-            <div
-              key={i}
-              className={`py-10 grid grid-cols-1 md:grid-cols-4 gap-6 group cursor-default transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              <div>
-                <p className="font-serif text-lg font-light text-stone-900">{item.publication}</p>
-                <p className="text-xs text-stone-400 mt-1">{item.date}</p>
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-ink/10">
+            {press.map((p) => (
+              <div
+                key={p.name}
+                className="scroll-reveal bg-cream p-8 lg:p-10 hover:bg-bone transition-colors duration-700 group"
+              >
+                <div className="flex items-start justify-between mb-8">
+                  <span className="font-display text-2xl tracking-tightest">{p.name}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-moss">{p.issue}</span>
+                </div>
+                <p className="font-display text-xl lg:text-2xl italic text-ink/80 leading-snug">
+                  « {p.quote} »
+                </p>
               </div>
-              <div className="md:col-span-3">
-                <h3 className="font-serif text-xl font-light text-stone-800 mb-3 group-hover:text-stone-600 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-stone-500 leading-relaxed">{item.excerpt}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

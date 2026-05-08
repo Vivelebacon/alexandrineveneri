@@ -1,65 +1,51 @@
 import { Link } from 'react-router-dom'
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="bg-stone-900 text-stone-400 py-16 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          <div>
-            <img src="/logo.jpg" alt="Alexandrine Veneri" className="h-8 w-auto mb-6 brightness-0 invert opacity-60" />
-            <p className="text-sm leading-relaxed text-stone-500">
-              Architecte d'intérieur, créatrice d'espaces qui allient élégance et fonctionnalité.
-            </p>
-          </div>
-
-          <div>
-            <p className="section-label text-stone-600 mb-6">Navigation</p>
-            <ul className="space-y-3">
-              {[
-                { href: '/portfolio', label: 'Portfolio' },
-                { href: '/a-propos', label: 'À propos' },
-                { href: '/presse', label: 'Presse' },
-                { href: '/contact', label: 'Contact' },
-              ].map(link => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-sm text-stone-500 hover:text-stone-300 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="section-label text-stone-600 mb-6">Contact</p>
-            <div className="space-y-3 text-sm text-stone-500">
-              <p>Paris, France</p>
-              <a
-                href="mailto:contact@alexandrineveneri.fr"
-                className="block hover:text-stone-300 transition-colors"
-              >
-                contact@alexandrineveneri.fr
-              </a>
-              <a
-                href="https://www.instagram.com/alexandrine.veneri"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:text-stone-300 transition-colors"
-              >
-                Instagram
-              </a>
-            </div>
-          </div>
+    <footer className="relative bg-ink text-cream pt-20 pb-12 overflow-hidden">
+      {/* Top: nav columns */}
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-10 mb-20 pb-12 border-b border-cream/10">
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40 block mb-5">Studio</span>
+          <p className="text-sm text-cream/80 leading-relaxed">Paris 7e<br />Île-de-France<br />France</p>
         </div>
-
-        <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-stone-600">
-            © {new Date().getFullYear()} Alexandrine Veneri. Tous droits réservés.
-          </p>
-          <p className="text-xs text-stone-700">
-            Architecte d'intérieur CFAI
-          </p>
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40 block mb-5">Navigation</span>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/realisations" className="text-cream/80 hover:text-cream transition-colors">Réalisations</Link></li>
+            <li><Link to="/a-propos" className="text-cream/80 hover:text-cream transition-colors">À propos</Link></li>
+            <li><Link to="/presse" className="text-cream/80 hover:text-cream transition-colors">Presse</Link></li>
+            <li><Link to="/contact" className="text-cream/80 hover:text-cream transition-colors">Contact</Link></li>
+          </ul>
         </div>
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40 block mb-5">Contact</span>
+          <a href="mailto:alexandrineveneri@gmail.com" className="text-sm text-cream/80 hover:text-cream transition-colors break-all">alexandrineveneri@gmail.com</a>
+        </div>
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40 block mb-5">Suivre</span>
+          <ul className="space-y-2 text-sm">
+            <li><a href="https://www.instagram.com/alexandrineveneri/" target="_blank" rel="noreferrer" className="text-cream/80 hover:text-cream transition-colors">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/in/alexandrine-veneri-373521313/" target="_blank" rel="noreferrer" className="text-cream/80 hover:text-cream transition-colors">LinkedIn</a></li>
+            <li><a href="https://fr.pinterest.com/Alexandrineveneri1/" target="_blank" rel="noreferrer" className="text-cream/80 hover:text-cream transition-colors">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Giant signature */}
+      <div className="overflow-hidden border-b border-cream/10 pb-8 mb-8">
+        <h3 className="font-display text-[18vw] lg:text-[14vw] leading-[0.85] tracking-tightest font-light text-center text-cream/95 px-6">
+          Alexandrine Vénéri
+        </h3>
+      </div>
+
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs font-mono uppercase tracking-[0.2em] text-cream/60">
+        <span>© 2026 · Tous droits réservés</span>
+        <span className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-terracotta animate-pulse" />
+          Studio basé à Paris
+        </span>
+        <span>Mentions légales</span>
       </div>
     </footer>
   )
